@@ -24,8 +24,8 @@ The project follows a basic Django structure:
 
 Installation
 
-    Clone the repository:
-git clone https://github.com/manda21/cv_app.git
+Clone the repository:
+https://github.com/mandan21/cv_app.git
 cd cv_app
 
 Set up a virtual environment:
