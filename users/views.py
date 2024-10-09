@@ -22,19 +22,16 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 def login_view(request):
-   def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('upload_cv')  # Redirect to the CV upload page
-    else:
-        form = AuthenticationForm()
-    return render(request, 'users/login.html', {'form': form})
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('upload_cv')  # Redirect to desired view after login
+        else:
+            messages.error(request, 'Invalid username or password')  # Handle errors
+    return render(request, 'users/login.html')
 
 @login_required
 def upload_cv(request):
