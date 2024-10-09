@@ -1,4 +1,15 @@
-<h2>Your CV</h2>
-<p>Uploaded at: {{ cv.uploaded_at }}</p>
-<a href="{{ cv.upload.url }}">Download CV</a>
-<pre>{{ cv.data }}</pre>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your CV</title>
+</head>
+<body>
+    <h1>Your CV</h1>
+    <p>Uploaded at: {{ cv.uploaded_at }}</p>
+    <p>Data from CV:</p>
+    <pre>{{ cv.data|safe }}</pre> <!-- Display JSON data as preformatted text -->
+    <p><a href="{% url 'upload_cv' %}">Upload another CV</a></p>
+</body>
+</html>
