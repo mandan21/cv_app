@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 import pandas as pd
 from .models import CV
 from django.core.files.storage import FileSystemStorage
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 def register(request):
     if request.method == 'POST':
@@ -38,3 +40,25 @@ def upload_cv(request):
         CV.objects.update_or_create(user=request.user, defaults={'upload': uploaded_file, 'data': excel_json})
         return redirect('dashboard')
     return render(request, 'users/upload.html')
+
+
+
+
+@staff_member_required
+def view_all_cvs(request):
+    cvs = CV.objects.all()
+    return render(request, 'admin/cvs.html', {'cvs': cvs})@staff_member_required
+def admin_dashboard(request):
+    return render(request, 'admin_dashboard.html')
+
+
+
+# from django.http import HttpResponse
+
+# def index(request):
+#     return HttpResponse("Hello, world!")
+
+from django.shortcuts import render
+
+def login_view(request):
+    return render(request, 'users/login.html')

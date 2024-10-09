@@ -1,0 +1,11 @@
+# users/templates/admin/cvs.html
+<h2>All Users and their CVs</h2>
+<table>
+    <tr><th>Username</th><th>CV Data</th></tr>
+    {% for cv in cvs %}
+        <tr>
+            <td>{{ cv.user.username }}</td>
+            <td><pre>{{ cv.data|safe }}</pre></td>
+        </tr>
+    {% endfor %}
+</table>
