@@ -1,8 +1,0 @@
-<h2>Welcome, {{ user.username }}</h2>
-
-{% if cv %}
-    <h3>Your CV</h3>
-    <pre>{{ cv.data|safe }}</pre>
-{% else %}
-    <p>No CV uploaded yet. <a href="{% url 'upload_cv' %}">Upload one here</a>.</p>
-{% endif %}

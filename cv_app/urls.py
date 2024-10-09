@@ -16,18 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.urls import include, path
-from users import views
-from django.contrib.auth import views as auth_views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('register/', views.register, name='register'),
-    path('login/', views.login_view, name='login'),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('', include('users.urls')),
-    path('upload/', views.upload_cv, name='upload_cv'),
-    path('profile/', views.profile_view, name='profile'),
+    path('users/', include('users.urls')),  # Include user app URLs
+    path('', RedirectView.as_view(url='users/register/', permanent=False)), 
 ]
